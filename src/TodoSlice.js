@@ -15,7 +15,7 @@ const todoSlice = createSlice({
       localStorage.setItem('todo', JSON.stringify(newState)); 
       return newState;
     },
-    toggleTodo: (state, action) => {
+    completedTodo: (state, action) => {
       const todo = state.find(todo => todo.id === action.payload);
       if (todo) {
         todo.completed = !todo.completed;
@@ -25,6 +25,6 @@ const todoSlice = createSlice({
   }
 });
 
-export const { addTodo, deleteTodo, toggleTodo } = todoSlice.actions;
+export const { addTodo, deleteTodo, completedTodo } = todoSlice.actions;
 export default todoSlice.reducer;
 

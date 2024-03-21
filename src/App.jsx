@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addTodo, deleteTodo, toggleTodo } from './TodoSlice';
+import { addTodo, deleteTodo, completedTodo } from './TodoSlice';
 import './App.css'
 import { Table } from 'react-bootstrap';
 
@@ -27,8 +27,8 @@ function App() {
     dispatch(deleteTodo(id));
   };
 
-  const handleToggleTodo = id => {
-    dispatch(toggleTodo(id));
+  const handleCompleted = id => {
+    dispatch(completedTodo(id));
   };
 
 
@@ -37,12 +37,11 @@ function App() {
       <div className='mb-5 '>
         <h1 className='text-warning'>Todo App</h1>
         <input 
-        className='mt-3'
-        
+          className='mt-3'
           type="text"
           value={ToDoContent}
           onChange={e => setToDoContent(e.target.value)}
-          placeholder="Enter todo"
+          placeholder="Enter todo "
         />
         
 
@@ -69,7 +68,7 @@ function App() {
               <td> <input
                 type="checkbox"
                 checked={todo.completed}
-                onChange={() => handleToggleTodo(todo.id)}
+                onChange={() => handleCompleted(todo.id)}
               />
               </td>
               <td>{todo.ToDoContent}</td>
