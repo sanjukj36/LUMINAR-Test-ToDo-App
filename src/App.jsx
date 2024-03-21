@@ -5,22 +5,25 @@ import './App.css'
 import { Table } from 'react-bootstrap';
 
 function App() {
-  const [text, setText] = useState('');
+  const [ToDoContent, setToDoContent] = useState('');
   const dispatch = useDispatch();
-  const todos = useSelector(state => state.todos);
+  const todo = useSelector(state => state.todo);
+
+ 
 
   const handleAddTodo = () => {
-    if (text.trim() !== '') {
+    if (ToDoContent !== '') {
+      console.log(todo);
       dispatch(addTodo({
-        id: Date.now(),
-        text,
+        id: todo.length+1,
+        ToDoContent,
         completed: false,
       }));
-      setText('');
+      setToDoContent('');
     }
   };
 
-  const handleDeleteTodo = id => {
+  const handleDelete= id => {
     dispatch(deleteTodo(id));
   };
 
@@ -37,8 +40,8 @@ function App() {
         className='mt-3'
         
           type="text"
-          value={text}
-          onChange={e => setText(e.target.value)}
+          value={ToDoContent}
+          onChange={e => setToDoContent(e.target.value)}
           placeholder="Enter todo"
         />
         
@@ -54,24 +57,24 @@ function App() {
 
       <Table striped bordered hover size="sm">
         <thead>
-          <tr>
+          <tr className='text-center'>
             <th>Completed</th>
             <th>ToDo Name</th>
             <th>Deleted</th>
           </tr>
         </thead>
         <tbody>
-          {todos.map(todo => (
-            <tr>
+          {todo.map(todo => (
+            <tr  key={todo.id}>
               <td> <input
                 type="checkbox"
                 checked={todo.completed}
                 onChange={() => handleToggleTodo(todo.id)}
               />
               </td>
-              <td>{todo.text}</td>
+              <td>{todo.ToDoContent}</td>
               <td>
-                <button className='btn' onClick={() => handleDeleteTodo(todo.id)}><i class="fa-solid fa-trash text-danger"></i></button>
+                <button className='btn' onClick={() => handleDelete(todo.id)}><i class="fa-solid fa-trash text-danger"></i></button>
               </td>
             </tr>
           ))}
@@ -82,17 +85,17 @@ function App() {
 
       <Table striped bordered hover size="sm">
         <thead>
-          <tr>
+          <tr  className='text-center'>
             <th>ToDo Name</th>
             <th>Deleted</th>
           </tr>
         </thead>
         <tbody>
-          {todos.filter(todo => todo.completed).map(todo => (
+          {todo.filter(todo => todo.completed).map(todo => (
             <tr key={todo.id}>
-              <td>{todo.text}</td>
+              <td>{todo.ToDoContent}</td>
               <td>
-                <button className='btn' onClick={() => handleDeleteTodo(todo.id)}>
+                <button className='btn' onClick={() => handleDelete(todo.id)}>
                   <i className="fa-solid fa-trash text-danger"></i>
                 </button>
               </td>
