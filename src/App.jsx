@@ -28,12 +28,11 @@ function App() {
     dispatch(toggleTodo(id));
   };
 
-  const completedTodosCount = todos.filter(todo => todo.completed).length;
 
   return (
     <div className='Container p-5 mt-5'>
       <div className='mb-5 '>
-        <h1>Todo App</h1>
+        <h1 className='text-warning'>Todo App</h1>
         <input 
         className='mt-3'
         
