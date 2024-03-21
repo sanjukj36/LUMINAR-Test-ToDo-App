@@ -1,25 +1,24 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = JSON.parse(localStorage.getItem('todos')) || [];
 
 const todoSlice = createSlice({
-  name: 'todos',
-  initialState: initialState,
+  name: 'todo',
+  initialState: [],
   reducers: {
     addTodo: (state, action) => {
       state.push(action.payload);
-      localStorage.setItem('todos', JSON.stringify(state));
+      localStorage.setItem('todo', JSON.stringify(state));
     },
     deleteTodo: (state, action) => {
       const newState = state.filter(todo => todo.id !== action.payload);
-      localStorage.setItem('todos', JSON.stringify(newState)); 
+      localStorage.setItem('todo', JSON.stringify(newState)); 
       return newState;
     },
     toggleTodo: (state, action) => {
       const todo = state.find(todo => todo.id === action.payload);
       if (todo) {
         todo.completed = !todo.completed;
-        localStorage.setItem('todos', JSON.stringify(state)); 
+        localStorage.setItem('todo', JSON.stringify(state)); 
       }
     }
   }

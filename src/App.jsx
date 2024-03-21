@@ -41,10 +41,7 @@ function App() {
           onChange={e => setText(e.target.value)}
           placeholder="Enter todo"
         />
-        {/* <input type="text"
-              value={text}
-              onChange={e => setText(e.target.value)}
-              placeholder="Enter todo" class="form-control" /> */}
+        
 
         <button className='btn btn-success ms-4' onClick={handleAddTodo}>Submit</button>
 
